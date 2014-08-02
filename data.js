@@ -31,12 +31,12 @@ var gold = [
 	},
 	{
 		"goldclass": "class-a",
-		"description": "This is a sentence of type A.",
+		"description": "This is another sentence of type A.",
 		"id": "4" //some unique identifier
 	},
 	{
-		"class": "class-b",
-		"description": "This is a sentence of type B.",
+		"goldclass": "class-b",
+		"description": "This is another sentence of type B.",
 		"id": "5" //some unique identifier
 	}
 ];

@@ -1,3 +1,6 @@
+//10points.wav from https://www.freesound.org/people/fawkes027/sounds/176046/ (cc-0)
+//other sounds from https://www.freesound.org/people/nebulousflynn/sounds/220305/ (cc-by)
+
 var clock = 0, points = 0, timeout = 0, questionOpen = false;
 var currentObject, currentState, annotator;
 
@@ -24,7 +27,7 @@ $(function(){
 	}
 	else {
 		console.log("audio"+ readCookie("noaudio"));
-		$("audio")[0].play();
+		$("#music").play();
 	}
 });
 
@@ -73,11 +76,11 @@ function getPoints(howmuch) {
 }
 
 function toggleAudio() {
-	  if ($("audio")[0].paused === false) {
-		  $("audio")[0].pause();
+	  if ($("#music")[0].paused === false) {
+		  $("#music")[0].pause();
 		  createCookie("noaudio", "1", 365);
 	  } else {
-		  $("audio")[0].play();
+		  $("#music")[0].play();
 		  eraseCookie("noaudio");
 	  }
 }
@@ -87,14 +90,18 @@ function buttonClick(button) {
 	if(currentState == "gold") {
 		if(currentObject.goldclass == $(this).data("id")) {
 			getPoints(10);
+			$("#sound-10")[0].play();
 		}
 		else {
+			console.log("fail. "+ $(this).data("id") + " vs " + currentObject.goldclass);
 			getPoints(-10);
+			$("#sound-fail")[0].play();
 		}
 	}
 	else {
 		//send request to server with $(this).data("id") and currentObject.id
 		getPoints(1);
+		$("#sound-1")[0].play();
 	}
 	$("#question").removeClass("active");
 }
