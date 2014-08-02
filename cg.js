@@ -1,4 +1,4 @@
-var clock = 0, points = 0, timeout = 0;
+var clock = 0, points = 0, timeout = 0, questionOpen = false;
 var currentObject, currentState, annotator;
 
 $(function(){
@@ -47,7 +47,8 @@ function moveLetters() {
 }
 
 function letterClick(){
-	if($("#question").hasClass("active")) getPoints(-1); //penalize skipping
+	if(questionOpen) {getPoints(-1);} //penalize skipping
+	questionOpen = true;
 	$(this).remove();
 	if (Math.random() > 0.8) {
 		var item = gold[Math.floor(Math.random()*gold.length)];
@@ -82,6 +83,7 @@ function toggleAudio() {
 }
 
 function buttonClick(button) {
+	questionOpen = false;
 	if(currentState == "gold") {
 		if(currentObject.goldclass == $(this).data("id")) {
 			getPoints(10);
