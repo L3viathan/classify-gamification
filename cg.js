@@ -16,8 +16,8 @@ function moveLetters() {
 		}
 	});
 	if(clock % 100 === 0) {
-		var offset = Math.floor(Math.random() * 6) + 1;
-		$("#canvas").append('<img src="letter.png" class="letter" style="left: ' + offset + '00px">');
+		var offset = Math.floor(Math.random() * 5) + 1;
+		$("#canvas").append('<img src="letter.png" class="letter" style="left: ' + offset + '50px">');
 		$(".letter").click(letterClick);
 	}
 	//if (clock % 500 === 0) { return;}
@@ -33,7 +33,7 @@ function letterClick(){
 function getPoints(howmuch) {
 	howmuch = typeof howmuch !== 'undefined' ? howmuch : 1;
 	points += howmuch;
-	$("#sidebar").text(points);
+	$("#points").text(String("00000" + points).slice(-6));
 }
 
 function toggleAudio() {
