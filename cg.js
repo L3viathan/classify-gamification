@@ -1,5 +1,5 @@
 var clock = 0, points = 0, timeout = 0;
-var currentObject, currentState;
+var currentObject, currentState, annotator;
 
 $(function(){
 	//on document init
@@ -10,7 +10,22 @@ $(function(){
 		$("#question").append("<button data-id='" + classes[e].id + "' class='button-class'>" + classes[e].description + "</button>");
 	})
 	$(".button-class").click(buttonClick);
-	if(window.location.protocol == "file") toggleAudio();
+	annotator = readCookie("annotator");
+	if (annotator == null) {
+		//create valid v4-uuid
+		annotator = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+			return v.toString(16);
+		});
+		createCookie("annotator", annotator, 365);
+	}
+	if (readCookie("noaudio") == "1"){
+		console.log("noaudio");
+	}
+	else {
+		console.log("audio"+ readCookie("noaudio"));
+		$("audio")[0].play();
+	}
 });
 
 function moveLetters() {
@@ -32,6 +47,7 @@ function moveLetters() {
 }
 
 function letterClick(){
+	if($("#question").hasClass("active")) getPoints(-1); //penalize skipping
 	$(this).remove();
 	if (Math.random() > 0.8) {
 		var item = gold[Math.floor(Math.random()*gold.length)];
@@ -58,8 +74,10 @@ function getPoints(howmuch) {
 function toggleAudio() {
 	  if ($("audio")[0].paused === false) {
 		  $("audio")[0].pause();
+		  createCookie("noaudio", "1", 365);
 	  } else {
 		  $("audio")[0].play();
+		  eraseCookie("noaudio");
 	  }
 }
 
@@ -77,4 +95,30 @@ function buttonClick(button) {
 		getPoints(1);
 	}
 	$("#question").removeClass("active");
+}
+
+function createCookie(name,value,days) {
+	var expires;
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		expires = "; expires="+date.toGMTString();
+	}
+	else expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
 }
