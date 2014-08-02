@@ -3,6 +3,14 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 *,div {
 	font-family: 'VT323', Menlo, Consolas, Monaco, "Lucida Console", monospace;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+body {
+	background-color: black;
 }
 
 #wrapper {
@@ -31,27 +39,30 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 #question {
 	z-index: 2;
 	position: absolute;
-	width: 800px;
+	width: 740px;
 	background-color: white;
 	height: 200px;
 	top: 500px;
+	padding: 30px;
+	visibility: hidden;
 }
 
 .letter {
 	position: absolute;
 	top: 0;
-	/*left: 100px;
-	margin-left: 100px; */
+	cursor: pointer;
 }
 
 .button-class {
 	width: 150px;
 	height: 100px;
 	font-size: xx-large;
+	cursor: pointer;
 }
 
 #sentence {
-	padding: 30px;
+	padding-bottom: 30px;
+	font-size: x-large;
 }
 
 #points {
@@ -59,4 +70,18 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 	bottom: 0;
 	position: relative;
 	padding: 10px;
+}
+
+.active {
+	box-shadow: inset 0px 0px 20px 0px #2889be;
+	visibility: visible !important;
+}
+
+#options {
+	position: fixed;
+	top: 0;
+	left: 0;
+	color: #2889be;
+	font-size: x-large;
+	cursor: pointer;
 }

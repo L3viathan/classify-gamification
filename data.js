@@ -1,23 +1,36 @@
-var classes = ['class-a','class-b','class-c'];
+var classes = [
+	{
+		"id": "class-a",
+		"description": "Class A"
+	},
+	{
+		"id": "class-b",
+		"description": "Class B"
+	},
+	{
+		"id": "class-c",
+		"description": "Class C"
+	}
+]
 
 var gold = [
 	{
-		"class": "class-a",
+		"goldclass": "class-a",
 		"description": "This is a sentence of type A.",
 		"id": "1" //some unique identifier
 	},
 	{
-		"class": "class-b",
+		"goldclass": "class-b",
 		"description": "This is a sentence of type B.",
 		"id": "2" //some unique identifier
 	},
 	{
-		"class": "class-c",
+		"goldclass": "class-c",
 		"description": "This is a sentence of type C.",
 		"id": "3" //some unique identifier
 	},
 	{
-		"class": "class-a",
+		"goldclass": "class-a",
 		"description": "This is a sentence of type A.",
 		"id": "4" //some unique identifier
 	},
