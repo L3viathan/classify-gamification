@@ -54,13 +54,13 @@ function letterClick(){
 	questionOpen = true;
 	$(this).remove();
 	if (Math.random() > 0.8) {
-		var item = gold[Math.floor(Math.random()*gold.length)];
+		var item = getGoldItem();
 		$("#sentence").text(item.description);
 		currentState = "gold";
 		currentObject = item;
 	}
 	else {
-		var item = unknown[Math.floor(Math.random()*unknown.length)];
+		var item = getUnknownItem();
 		$("#sentence").text(item.description);
 		currentState = "unknown";
 		currentObject = item;
@@ -130,4 +130,12 @@ function readCookie(name) {
 
 function eraseCookie(name) {
 	createCookie(name,"",-1);
+}
+
+function getGoldItem() {
+	return gold[Math.floor(Math.random()*gold.length)];
+}
+
+function getUnknownItem() {
+	return unknown[Math.floor(Math.random()*unknown.length)];
 }
