@@ -17,7 +17,7 @@ var gold = [
 	{
 		"goldclass": "class-a",
 		"description": "This is a sentence of type A.",
-		"id": "1" //some unique identifier
+		"id": "1" //some unique identifier, /\w+/
 	},
 	{
 		"goldclass": "class-b",
@@ -44,12 +44,12 @@ var gold = [
 var unknown = [
 	{
 		"description": "This is a sentence of an unknown type.",
-		"id": "foo", //not in gold
+		"id": "foo", //not in gold, still /\w+/
 		"annotation": [] //empty list
 	},
 	{
 		"description": "This is another sentence of an unknown type.",
-		"id": "foo", //not in gold
+		"id": "bar", //not in gold
 		"annotation": [] //empty list
 	},
 ];
