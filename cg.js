@@ -1,5 +1,6 @@
 //10points.wav from https://www.freesound.org/people/fawkes027/sounds/176046/ (cc-0)
 //other sounds from https://www.freesound.org/people/nebulousflynn/sounds/220305/ (cc-by)
+//music by Nullsleep
 
 var clock = 0, points = 0, timeout = 0, questionOpen = false;
 var currentObject, currentState, annotator;
@@ -23,10 +24,10 @@ $(function(){
 		createCookie("annotator", annotator, 365);
 	}
 	if (readCookie("noaudio") == "1"){
-		console.log("noaudio");
+		//console.log("noaudio");
 	}
 	else {
-		console.log("audio"+ readCookie("noaudio"));
+		//console.log("audio"+ readCookie("noaudio"));
 		$("#music").play();
 	}
 });
@@ -90,18 +91,18 @@ function buttonClick(button) {
 	if(currentState == "gold") {
 		if(currentObject.goldclass == $(this).data("id")) {
 			getPoints(10);
-			$("#sound-10")[0].play();
+			sound("#sound-10");
 		}
 		else {
-			console.log("fail. "+ $(this).data("id") + " vs " + currentObject.goldclass);
+			//console.log("fail. "+ $(this).data("id") + " vs " + currentObject.goldclass);
 			getPoints(-10);
-			$("#sound-fail")[0].play();
+			sound("#sound-fail");
 		}
 	}
 	else {
 		//send request to server with $(this).data("id") and currentObject.id
 		getPoints(1);
-		$("#sound-1")[0].play();
+		sound("#sound-1");
 	}
 	$("#question").removeClass("active");
 }
@@ -123,7 +124,7 @@ function readCookie(name) {
 	for(var i=0;i < ca.length;i++) {
 		var c = ca[i];
 		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
 	}
 	return null;
 }
@@ -139,3 +140,24 @@ function getGoldItem() {
 function getUnknownItem() {
 	return unknown[Math.floor(Math.random()*unknown.length)];
 }
+
+function sound(which) {
+	$(which)[0].play();
+}
+
+
+
+/**
+TODO:
+-levels (vorbei bei Punktzahl)
+-mehr Punkte pro Level
+-shop (aestetics + functional)
+-fortschritt gedöns (haus bauen?)
+-mäuse plus Eule
+-körbe drag&drop
+-stop wenn aktiv
+-openclipart
+-kein Punktabzug
+-firefox
+-shop *zwischen* level
+*/
